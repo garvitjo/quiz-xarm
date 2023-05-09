@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const path = require('path');
 const fs = require('fs');
-const clientFilesPath = path.join(__dirname, '..', 'client');
+const clientFilesPath = path.join(__dirname, 'client');
 let hasGameStarted = false;
 
 let questionSequence = [];
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/questions', (req, res) => {
-  const filePath = path.join(__dirname, 'questions.json');
+  const filePath = path.join(__dirname, 'Server','questions.json');
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
@@ -124,5 +124,4 @@ function resetServerVariables(){
 
 server.listen(port, () => {
   console.log("Server running.....");
-  console.log("http://localhost:" + port + "/");
 });
