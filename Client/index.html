@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumble Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="logo"></div>
+    <div class="feedbackPage hidden" id="feedbackPage">
+        <div class="feedbackIcon" id="feedbackIcon"></div>
+        <div class="feedbackText" id="feedbackText"></div>
+    </div>
+    <div id="begin-page">
+        <button class="btn btn-large" onclick="beginGameSinglePlayer()">Single Player</button>
+        <button class="btn btn-large" onclick="beginGameDoublePlayer()">Double Player</button>
+        <button class="btn-large" onclick="enterFullscreen()">Fullscreen</button>
+    </div>
+    <div id="home-page" class="hidden">
+        <input type="text" autocomplete="off" autofocus name="user-name" placeholder="Enter your Name" class="username" id="playerName">
+        <button onclick="getName()" class="btn">Ready</button>
+    </div>
+    <div id="waiting-page" class="hidden">
+        <h1>Waiting for other players to take up the Word challenge...</h1>
+    </div>
+    <div id="game-screen" class="hidden">
+        <div class="countdown" id="timer"></div>
+        <div class="question-area">
+            <div class="question" id="question-statement"></div>
+            <div class="answer-area" id ="answer-area">
+            </div>
+            <div class="option-area" id="option-box">
+            </div>
+        </div>
+        <button class="submit" onclick="validateAnswer()" id="submitButtonQuiz" disabled = "true">Submit</button>
+    </div>
+    <div class="endScreen hidden" id="endScreen">
+        <div class="leaderboard" id="leaderboard-final">
+            <div class="leaderboard-title"><h1>Leaderboard</h1></div>
+            <div class="row row-heading">
+                <h1>Name</h1>
+                <h1>Position</h1>
+            </div>
+        </div>
+        <div class="waiting-for-quiz-to-end" id="waiting-for-quizEnd">Waiting for other player's quiz to end...</div>
+        <button onclick="continueFromLeaderboard()" class="btn">Continue</button>
+    </div>
+    <div class ="finalScreenContainer hidden" id="finalScreen">
+        <h1>Congratulations you have the power of search, please Collect your goodies</h1>
+        <button onclick="restartQuiz()" class="btn">Restart</button>
+    </div>
+
+
+    <section class="Audio-Section">
+        <audio src="assets/audio/correctAnswer.mp3" id="correctAnswerAudio"></audio>
+        <audio src="assets/audio/optionClick.mp3" id="optionClickAudio"></audio>
+        <audio src="assets/audio/quizCompleted.mp3" id="quizCompletedAudio"></audio>
+        <audio src="assets/audio/wrongAnswer.mp3" id="wrongAnswerAudio"></audio>
+    </section>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+    <script src="quizManager.js"></script>
+</body>
+</html>
