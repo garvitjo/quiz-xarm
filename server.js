@@ -19,7 +19,8 @@ const io = socketIO(server, { cors: { origin: "*" } });
 app.use(express.static(clientFilesPath));
 
 app.get('/', (req, res) => {
-  res.send('Client/index.html');
+  const filePath = path.join(__dirname,"Client","index.html");
+  res.sendFile(filePath);
 });
 
 app.get('/questions', (req, res) => {
