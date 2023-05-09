@@ -19,7 +19,7 @@ const io = socketIO(server, { cors: { origin: "*" } });
 app.use(express.static(clientFilesPath));
 
 app.get('/', (req, res) => {
-  res.send('index.html');
+  res.send('Client/index.html');
 });
 
 app.get('/questions', (req, res) => {
