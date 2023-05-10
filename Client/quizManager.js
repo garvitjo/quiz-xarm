@@ -27,11 +27,6 @@ let quizCompletedAudio = document.getElementById("quizCompletedAudio");
 let optionClickAudio = document.getElementById("optionClickAudio");
 let correctAnswerAudio = document.getElementById("correctAnswerAudio");
 
-let feedbackHTML = document.getElementById("feedbackPage");
-let feedbackIconHTML = document.getElementById("feedbackIcon");
-let feedbackTextHTML = document.getElementById("feedbackText");
-
-
 function startQuiz(){
     timeScore = 0;
     getNextQuestion();
@@ -77,21 +72,21 @@ function updateTime(){
 function displayFeedback(isAnsweredCorrectly, question){
     shouldTimerRun = false;
     clearInterval(timerIntervalID);
-    const correctIconUrl = "/asset/correctIcon.svg";
-    const incorrectIconUrl = "/asset/incorrectIcon.svg";
-
-    feedbackHTML.classList.toggle("hidden");
     timeScore += timeAllowed - currentTime;
 
+    const answerArea = document.getElementById("answer-area");
+    
     if(isAnsweredCorrectly){
-        feedbackIconHTML.innerText = correctIconUrl;
-        feedbackTextHTML.innerText = "Yay! You are correct!"
+        answerArea.childNodes.forEach(c =>{
+            c.classList.add("correct-answer");
+        });
     }else{
-        feedbackIconHTML.innerText = incorrectIconUrl;
-        feedbackTextHTML.innerText = "Oops! The correct answer is: " + question.correctAnswer;
+        answerArea.childNodes.forEach(c =>{
+            c.classList.add("wrong-answer");
+        });
     }
 
-    window.setTimeout(()=>{feedbackHTML.classList.toggle("hidden"); getNextQuestion();},3000)
+    window.setTimeout(()=>{getNextQuestion();},1000)
 }
 
 function displayQuestion(question){
@@ -209,6 +204,12 @@ function validateAnswer(){
     else{
         //play some wrong answer animation
         playSound(wrongAnswerAudio);
+        const answerArea = document.getElementById("answer-area");
+        answerArea.childNodes.forEach(c =>{
+        c.classList.add("wrong-answer");
+        window.setTimeout(()=>{c.classList.toggle("wrong-answer")},500)
+        });
+        
     }
 }
 
@@ -221,3 +222,12 @@ function playSound(audio) {
       audio.play();
     }
 }
+
+
+
+//testing only
+// displayQuestion({
+//     "questionStatement":"The practice of collecting, processing, and analyzing telemetry data from distributed systems to gain insights into their behavior, performance, and health",
+//     "options":["V","I","R","L","E","I","O","Y","T","S","B","B","A"],
+//     "correctAnswer":"OBSERVABILITY"
+// });

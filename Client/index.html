@@ -9,32 +9,36 @@
 </head>
 <body>
     <div class="logo"></div>
-    <div class="feedbackPage hidden" id="feedbackPage">
-        <div class="feedbackIcon" id="feedbackIcon"></div>
-        <div class="feedbackText" id="feedbackText"></div>
-    </div>
     <div id="begin-page">
+        <img src="./assets/do-you-have-power-of-search.png" id="do-you-have-power-of-search">
+        <h1 id="choose-gamemode">Choose game mode</h1>
         <button class="btn btn-large" onclick="beginGameSinglePlayer()">Single Player</button>
-        <button class="btn btn-large" onclick="beginGameDoublePlayer()">Double Player</button>
-        <button class="icon-btn" onclick="enterFullscreen()"></button>
+        <button class="btn btn-large" onclick="beginGameDoublePlayer()">Multi Player</button>
+        <button class="icon-btn" id="fullscreen-button" onclick="enterFullscreen()"></button>
     </div>
     <div id="home-page" class="hidden">
-        <input type="text" autocomplete="off" autofocus name="user-name" placeholder="Enter your Name" class="username" id="playerName">
-        <button onclick="getName()" class="btn">Ready</button>
+        <img src="./assets/do-you-have-power-of-search.png" id="do-you-have-power-of-search">
+        <img src="./assets/rules-page-blue.png" id="rules-page-blue">
+        <div id="input-name-container">
+            <label for="playerName">Please enter your name</label>
+            <input type="text" autocomplete="off" autofocus name="user-name" placeholder="Enter your Name" class="username" id="playerName">
+        </div>
+        <button onclick="getName()" class="btn btn-large">Start now</button>
     </div>
     <div id="waiting-page" class="hidden">
         <h1>Waiting for other players to take up the Word challenge...</h1>
     </div>
     <div id="game-screen" class="hidden">
-        <div class="countdown" id="timer"></div>
+        <div class="countdown" id="timer">30</div>
         <div class="question-area">
-            <div class="question" id="question-statement"></div>
             <div class="answer-area" id ="answer-area">
             </div>
             <div class="option-area" id="option-box">
             </div>
+            <button class="btn" onclick="validateAnswer()" id="submitButtonQuiz" disabled = "true">Submit</button>
+            <div id="clue">Clue</div>
+            <div class="question" id="question-statement"></div>
         </div>
-        <button class="submit" onclick="validateAnswer()" id="submitButtonQuiz" disabled = "true">Submit</button>
     </div>
     <div class="endScreen hidden" id="endScreen">
         <div class="leaderboard" id="leaderboard-final">
@@ -44,14 +48,22 @@
                 <h1>Position</h1>
             </div>
             <div id="player-rows-start">
-
+                <div class="row">
+                    <h1>player 1</h1>
+                    <h1>First</h1>
+                </div>
+                <div class="row">
+                    <h1>player 2</h1>
+                    <h1>First</h1>
+                </div>
             </div>
         </div>
         <div class="waiting-for-quiz-to-end" id="waiting-for-quizEnd">Waiting for other player's quiz to end...</div>
         <button onclick="continueFromLeaderboard()" class="btn">Continue</button>
     </div>
     <div class ="finalScreenContainer hidden" id="finalScreen">
-        <h1>Congratulations you have the power of search, please Collect your goodies</h1>
+        <img src="./assets/do-you-have-power-of-search.png" id="do-you-have-power-of-search">
+        <img src="./assets/final-screen-congratulation.png" id="rules-page-blue">
         <button onclick="restartQuiz()" class="btn">Restart</button>
     </div>
 

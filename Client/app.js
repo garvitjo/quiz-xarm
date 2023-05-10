@@ -13,7 +13,7 @@ let socket;
 
 //only for testing purpose
 // hidePage(beginScreenContainer);
-// unhidePage(endScreenContainer);
+// unhidePage(finalScreenContainer);
 
 function enterFullscreen() {
     const doc = window.document.documentElement;
