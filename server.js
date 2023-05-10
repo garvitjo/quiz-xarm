@@ -133,6 +133,7 @@ function resetServerVariables(){
   if(questionSequence.length > 0){
     questionSequence.length = 0;
   }
+  hasGameStarted = false;
 
   return "server Variables Reset Done";
 }
