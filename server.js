@@ -21,7 +21,7 @@ app.use(express.static(clientFilesPath));
 
 app.get('/', (req, res) => {
   const filePath = path.join(__dirname,"Client","index.html");
-  res.type(".html").send(filePath);
+  res.send(filePath);
 });
 
 app.get('/questions', (req, res) => {
