@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const path = require('path');
 const fs = require('fs');
-const clientFilesPath = path.join(__dirname, 'client');
+const cors = require('cors')
 
 let hasGameStarted = false;
 
@@ -16,12 +16,10 @@ let players = new Map();
 
 const server = http.createServer(app);
 const io = socketIO(server, { cors: { origin: "*" } });
-
-app.use(express.static(clientFilesPath));
+app.use(cors())
 
 app.get('/', (req, res) => {
-  const filePath = path.join(__dirname,"Client","index.html");
-  res.send(filePath);
+  res.send("Backend running");
 });
 
 app.get('/questions', (req, res) => {
@@ -48,6 +46,10 @@ app.get('/question-sequence', (req, res) => {
 
 app.get('/resetServerVariables',(req,res)=>{
   res.send(resetServerVariables());
+});
+
+app.get('/test',(req,res)=>{
+  res.status(200).json({"message":"test"});
 });
 
 function generateRandomSequence(questionNumber) {
@@ -136,5 +138,5 @@ function resetServerVariables(){
 }
 
 server.listen(port, () => {
-  console.log("Server running.....");
+  console.log("Server running at.....", port);
 });
