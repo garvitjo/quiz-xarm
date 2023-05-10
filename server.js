@@ -66,7 +66,10 @@ function generateRandomSequence(questionNumber) {
 
 
 io.on('connection', socket => {
-
+  if(hasGameStarted){
+    socket.emit('cannot-connect-now',"hasGameStarted");
+    return;
+  }
   if (!hasGameStarted) {
     let tempPlayer = {
       clientId: socket.id,
@@ -87,8 +90,12 @@ io.on('connection', socket => {
   });
 
   socket.on("ready-to-start-game", (player) => {
-    
+    if(players.size <= 1){
+      socket.emit("only-one-player");
+      return;
+    }
     players.get(player.clientId).isReady = true;
+    socket.emit("ok-marked-you-ready");
 
     if (areAllReady()) {
       io.emit("start-the-game");
@@ -104,7 +111,6 @@ io.on('connection', socket => {
       }
     });
     if(shouldDisplayLeaderboard){
-      hasGameStarted = false;
       io.emit("show-leaderboard",JSON.stringify(Array.from(players)));
     }
   });
