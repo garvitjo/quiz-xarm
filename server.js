@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 const fs = require('fs');
 const clientFilesPath = path.join(__dirname, 'client');
+
 let hasGameStarted = false;
 
 let questionSequence = [];
@@ -43,6 +44,10 @@ app.get('/question-sequence', (req, res) => {
   }
   // Send the question sequence as a JSON response
   res.json(questionSequence);
+});
+
+app.get('/resetServerVariables',(req,res)=>{
+  res.send(resetServerVariables());
 });
 
 function generateRandomSequence(questionNumber) {
@@ -121,6 +126,13 @@ function areAllReady(){
 
 function resetServerVariables(){
   //reset all the server variables here.
+  players.clear();
+  
+  if(questionSequence.length > 0){
+    questionSequence.length = 0;
+  }
+
+  return "server Variables Reset Done";
 }
 
 server.listen(port, () => {

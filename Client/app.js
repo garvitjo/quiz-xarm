@@ -107,8 +107,8 @@ function showEndScreen(){
 
   if(isSinglePlayerGame){
     hidePage(gameScreenContainer);
-    unhidePage(endScreenContainer);
-    createLeaderboard();
+    unhidePage(finalScreenContainer);
+    resetVariables();
     return;
   }
 
@@ -120,24 +120,22 @@ function showEndScreen(){
 }
 
 function createLeaderboard(){
-  const leaderboardContainer = document.getElementById("leaderboard-final");
-  const children = leaderboardContainer.childNodes;
+  const leaderboardContainer = document.getElementById("player-rows-start");
   
-  for (let i = 2; i < children.length; i++) {
-    if(children[i]){
-      leaderboardContainer.removeChild(children[i]);
-    }
+  while(leaderboardContainer.hasChildNodes()){
+    leaderboardContainer.removeChild(leaderboardContainer.firstChild);
   }
-  if(isSinglePlayerGame){
 
-  }
+  const waitingText = document.getElementById("waiting-for-quizEnd");
+  unhidePage(waitingText);
 }
 
 function populateLeaderboard(players){
   let arr = calculateScore(players);
   const waitingText = document.getElementById("waiting-for-quizEnd");
-  waitingText.remove();
-  const leaderboardContainer = document.getElementById("leaderboard-final");
+  hidePage(waitingText);
+
+  const leaderboardContainer = document.getElementById("player-rows-start");
   for(let i = 0 ; i < arr.length ; i++){
     const tempRow = document.createElement('div');
     const tempName = document.createElement('h1');
@@ -172,9 +170,9 @@ function startTheGame(){
 }
 
 function continueFromLeaderboard(){
-  resetVariables();
   hidePage(endScreenContainer);
   unhidePage(finalScreenContainer);
+  resetVariables();
 }
 
 function restartQuiz(){
@@ -183,7 +181,20 @@ function restartQuiz(){
 }
 
 function resetVariables(){
-  
+  fetch('/resetServerVariables')
+  .then(response => {
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+  thisPlayer = null;
+  otherPlayers.clear();
+  isSinglePlayerGame = false;
+  document.getElementById("playerName").value = "";
+  if(socket){
+    socket.disconnect(true);
+  }
 }
 
 function hidePage(page){
