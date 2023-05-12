@@ -118,6 +118,9 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     players.delete(socket.id);
     io.emit("player-disconnected",socket.id);
+    if(players.size == 0){
+      resetServerVariables();
+    }
     });
 });
 
