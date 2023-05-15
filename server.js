@@ -37,9 +37,7 @@ app.get('/questions', (req, res) => {
 
 app.get('/question-sequence', (req, res) => {
   // Generate an array of question sequence
-  if(questionSequence.length <= 0){
-    questionSequence = generateRandomSequence(3);
-  }
+  questionSequence = generateRandomSequence(1);
   // Send the question sequence as a JSON response
   res.json(questionSequence);
 });
