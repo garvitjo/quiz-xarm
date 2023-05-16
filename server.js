@@ -4,6 +4,9 @@ const port = process.env.PORT || 8080;
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors')
+const bodyParser = require('body-parser');
+
+let registeredEmails = new Map();
 
 let hasGameStarted = false;
 
@@ -17,7 +20,7 @@ let players = new Map();
 const server = http.createServer(app);
 const io = socketIO(server, { cors: { origin: "*" } });
 app.use(cors())
-
+app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.send("Backend running");
 });
@@ -46,8 +49,31 @@ app.get('/resetServerVariables',(req,res)=>{
   res.send(resetServerVariables());
 });
 
+app.get('/resetRegisteredEmails',(req,res)=>{
+  res.send(resetRegisteredEmails());
+});
+
 app.get('/test',(req,res)=>{
   res.status(200).json({"message":"test"});
+});
+
+app.post('/authenticalmail', (req, res) => {
+  const { email } = req.body;
+  let isNewUser = true;
+
+
+  if (!email) {
+    res.status(400).json({ error: 'Email is required' });
+    return;
+  }
+  if(registeredEmails.has(email)){
+    isNewUser = false;
+  }
+  else{
+    registeredEmails.set(email, true);
+  }
+  
+  res.json({ isRegistered: isNewUser });
 });
 
 function generateRandomSequence(questionNumber) {
@@ -141,8 +167,13 @@ function resetServerVariables(){
     questionSequence.length = 0;
   }
   hasGameStarted = false;
-
+  //registeredEmails.clear();
   return "server Variables Reset Done";
+}
+
+function resetRegisteredEmails(){
+  registeredEmails.clear();
+  return "Email registrations reset";
 }
 
 server.listen(port, () => {
