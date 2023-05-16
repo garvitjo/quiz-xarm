@@ -6,12 +6,12 @@
     },
     "2":{
         "questionStatement":"A distributed, RESTful search and analytics engine capable of solving a growing number of use cases.",
-        "options":["E","L","S","T","A","R","S","C","A","I","E","C","H"],
+        "options":["E","L","S","T","A","I","C","S","E","R","A","C","H"],
         "correctAnswer":"ELASTICSEARCH"
     },
     "3":{
         "questionStatement":"A process of proactively searching through networks and datasets to detect and respond to advanced threats that may have evaded traditional security measures",
-        "options":["T","H","A","R","D","E","T","H","N","G","U","I","N"],
+        "options":["T","H","R","A","E","D","H","N","T","U","I","N","G"],
         "correctAnswer":"THREADHUNTING"
     },
     "4":{
@@ -26,17 +26,17 @@
     },
     "6":{
         "questionStatement":"A weakness or gap in security controls that could be exploited by threat actors to compromise the confidentiality, integrity, or availability of information assets",
-        "options":["V","U","E","N","R","L","I","Y","A","B","I","T","L"],
+        "options":["V","U","L","E","N","R","A","I","B","I","L","T","Y"],
         "correctAnswer":"VULNERABILITY"
     },
     "7":{
         "questionStatement":"The practice of collecting, processing, and analyzing telemetry data from distributed systems to gain insights into their behavior, performance, and health",
-        "options":["O","B","R","L","S","I","V","Y","T","E","I","B","A"],
+        "options":["O","B","E","S","R","A","V","I","B","L","T","I","Y"],
         "correctAnswer":"OBSERVABILITY"
     },
     "8":{
         "questionStatement":"An unusual or unexpected pattern or behavior in data that deviates from the norm and may indicate a potential security threat or system issue",
-        "options":["A","M","O","A","N","Y","L"],
+        "options":["A","M","O","N","A","Y","L"],
         "correctAnswer":"ANOMALY"
     },
     "9":{
